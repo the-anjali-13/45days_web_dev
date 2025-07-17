@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      border: 1px solid black;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    nav {
+      background: #007BFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      /* position: fixed; */
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .nav-links a {
+      color: #fff;
+      margin-left: 2rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffc107;
+    }
+
+    section {
+      padding: 80px 10% 40px;
+    }
+
+    #home {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #home .intro-text {
+      flex: 1 1 60%;
+    }
+
+    #home img {
+      flex: 1 1 30%;
+      max-width: 300px;
+      border-radius: 50%;
+      border: 3px solid #007BFF;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #007BFF;
+      margin-bottom: 1rem;
+    }
+
+    .skills-list, .projects-list, .achievements-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer {
+      background: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .socials a {
+      margin: 0 1rem;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer .socials a {
+      color: #fff;
+    }
+
+    .footer .socials a:hover {
+      color: #ffc107;
+    }
+
+    /* Contact section links specific styling */
+    #contact .socials a {
+      color: #007BFF;
+      font-weight: 500;
+    }
+
+    #contact .socials a:hover {
+      color: #0056b3;
+    }
+
+    #skills div div img{
+      height: 100px; 
+      width :100px;
+
+    }
+    #skills div div{
+      text-align: center;
+    }
+    .socials{
+      width:100%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding:30px;
+      background-color: #e9e9e9;
+    }
+    .social-media{
+
+      width:100%;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding:30px;
+      background-color: #000000;
+
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Anjali Sharma</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section id="home">
+    <div class="intro-text">
+      <h1>Hello! I'm Anjali Sharma</h1>
+      <p>A passionate developer who loves to build beautiful and functional websites using modern web technologies. Welcome to my digital space!</p>
+    </div>
+    <img src="https://avatar.iran.liara.run/public/girl" alt="My Photo">
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">My Skills</h2>
+    <div class="skills-list">
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/html-5.png" alt="HTML">
+        <h3>HTML & CSS</h3>
+        <p>Level: Advanced</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/javascript.png" alt="JS">
+        <h3>JavaScript</h3>
+        <p>Level: Intermediate</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/java-coffee-cup-logo.png" alt="Java">
+        <h3>Java</h3>
+        <p>Level: Advanced</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/mysql-logo.png" alt="MySQL">
+        <h3>MySQL</h3>
+        <p>Level: Intermediate</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/bootstrap.png" alt="Bootstrap">
+        <h3>Bootstrap</h3>
+        <p>Level: Intermediate</p>
+      </div>
+      <div class="card">
+        <img src="https://img.icons8.com/color/96/python.png" alt="Python">
+        <h3>Python</h3>
+        <p>Level: Beginner</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2 class="section-title">Achievements</h2>
+    <div class="achievements-list">
+      <div class="card">
+        <img src="certificate.jpg" alt="CodeAlpha">
+        <h3> Internship</h3>
+        <p>Successfully completed Java development internship with multiple terminal-based projects and improved logical problem solving.</p>
+      </div>
+      <div class="card">
+        <img src="certificate.jpg" alt="AWS Workshop">
+        <h3>Workshop</h3>
+        <p>Learned and practiced using EC2, S3, CloudFront; deployed a responsive website with hands-on experience under expert guidance.</p>
+      </div>
+      <div class="card">
+        <img src="certificate.jpg" alt="NxtWave">
+        <h3>hackerthons</h3>
+        <p>Coded daily under time limits for 7 days, revised core technical concepts and earned recognition for consistent effort.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">My Projects</h2>
+    <div class="projects-list">
+      <div class="card">
+        <img src="project img.jpg" alt="Hotel">
+        <h3>Hotel Reservation System</h3>
+        <p>Terminal-based Java project to reserve rooms, view availability, and manage guest records with clean code structure.</p>
+      </div>
+      <div class="card">
+        <img src="project img.jpg" alt="Grade">
+        <h3>Student Grade Tracker</h3>
+        <p>Allows teachers to input, analyze, and manage student performance in terminal environment using ArrayLists.</p>
+      </div>
+      <div class="card">
+        <img src="project img.jpg" alt="Quiz">
+        <h3>Online Quiz Platform</h3>
+        <p>Java-based quiz system to manage multiple choice questions, collect user input, and show results.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="card">
+      <img src="studyimg.jpg" style="height:200px; width:100%" alt="University">
+      <h3>Bachelor’s Degree in Computer Science</h3>
+      <p>XYZ University<br>2021 - Present<br>Active participant in tech fests, coding clubs, and hackathons. Passionate about learning through real-world projects and teamwork.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact Me</h2>
+    <p>Reach out to me on the following platforms or email me directly:</p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#"><i class="fab fa-github"></i> GitHub</a>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="mailto:example@email.com"><i class="fas fa-envelope"></i> Email</a>
+      
+    </div>
+  </section>
+
+
+</body>
+</html>

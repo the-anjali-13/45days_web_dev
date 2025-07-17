@@ -1,0 +1,104 @@
+body{
+    margin:0px;
+    padding:0px;
+    /* width:100%; */
+}
+.navbar{
+    width:100vw;
+    display:flex;
+    flex-direction: row; 
+    padding:5px;
+    color:white;
+    background-color: rgb(42, 133, 212);
+    justify-content: space-between;
+}
+
+.navbar h1{
+    margin :10px;
+}
+
+.navbar div{
+    width:40%;
+    display:flex;
+    justify-content: space-between;
+    margin:10px;
+}
+
+.myimg{
+    height:300px;
+    width:300px;
+}
+
+#home{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top:50px;
+    padding-bottom:50px;
+    /* border : 2px solid black */
+}
+
+#home div{
+    margin-right:100px;
+    align-self: center;
+}
+
+#skills{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top:50px;
+    padding-bottom:50px;
+    
+}
+#skills .skillshead {
+    width:80vw;
+    /* padding-left:400px; */
+}
+
+/* #skills div h1{
+    text-align:center
+} */
+
+.skillcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.skillcards{
+    background-color: rgb(236, 236, 236);
+    border-radius: 10px;
+    margin:10px;
+    padding:20px;
+    border: 1px solid rgb(207, 207, 207);
+    height: 200px;
+    width:150px;
+}
+.achivecards {
+    height: 380px;
+    width:300px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+    padding:10px;
+    text-emphasis: center;
+    margin:20px;
+}
+.achivecards img{
+        height: 200px;
+        width:100%;
+        border-radius: 10px;
+}
+
+.achivecards p{
+    overflow-y: auto;
+}
+
+.achivecontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+

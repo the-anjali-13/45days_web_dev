@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+ .skill-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  padding: 30px;
+}
+
+.skill {
+  background-color: #74b9ff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.3s;
+}
+
+.skill:hover {
+  transform: scale(1.05);
+  background-color: #0984e3;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .skill-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .skill-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+    </style>
+
+</head>
+<body>
+   <div class="skill-panel">
+  <div class="skill">💻 HTML</div>
+  <div class="skill">🎨 CSS</div>
+  <div class="skill">⚙️ JavaScript</div>
+  <div class="skill">🐍 Python</div>
+  <div class="skill">🛢️ SQL</div>
+  <div class="skill">☁️ AWS</div>
+  <div class="skill">💡 Problem Solving</div>
+  <div class="skill">🧠 Logic</div>
+</div>
+
+
+</body>
+</html>

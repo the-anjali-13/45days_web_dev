@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Typing Speed Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin-top: 50px;
+    }
+    #letter {
+      font-size: 60px;
+      color: green;
+      margin: 20px;
+    }
+    #timer {
+      font-size: 20px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Typing Speed Game</h1>
+  <p>Type the letter shown below. You have <strong>15 seconds</strong>!</p>
+
+  <div id="letter">?</div>
+  <p>Score: <span id="score">0</span></p>
+  <p id="timer">Time: 0s</p>
+  <p id="message"></p>
+
+  <script>
+    let score = 0;
+    let timeElapsed = 0;
+    let gameOver = false;
+
+    const letterBox = document.getElementById("letter");
+    const scoreBox = document.getElementById("score");
+    const timerBox = document.getElementById("timer");
+    const message = document.getElementById("message");
+
+    function getRandomLetter() {
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      return letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    function showNewLetter() {
+      letterBox.textContent = getRandomLetter();
+    }
+
+    const timer = setInterval(() => {
+      timeElapsed++;
+      timerBox.textContent = `Time: ${timeElapsed}s`;
+
+      if (timeElapsed === 15) {
+        clearInterval(timer);
+        gameOver = true;
+        message.textContent = `Time's up! You scored ${score} points!`;
+      }
+    }, 1000);
+
+    document.addEventListener("keydown", function(event) {
+      if (gameOver) return;
+
+      const pressedKey = event.key.toUpperCase();
+      const currentLetter = letterBox.textContent;
+
+      if (pressedKey === currentLetter) {
+        score++;
+        scoreBox.textContent = score;
+        message.textContent = "Correct!";
+      } else {
+        message.textContent = "Wrong!";
+      }
+
+      showNewLetter();
+    });
+
+    showNewLetter(); 
+  </script>
+
+</body>
+</html>

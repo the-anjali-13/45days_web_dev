@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netflix Plan Selector</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #e50914;
+    }
+
+    .plans-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .plan-card {
+      flex: 1 1 250px;
+      max-width: 300px;
+      min-height: 380px;
+      padding: 20px;
+      background-color: #f7f7f7;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .plan-card h2 {
+      color: #e50914;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 1.8em;
+      margin: 15px 0;
+      color: #222;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95em;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc0812;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choose Your Netflix Plan</h1>
+
+  <div class="plans-container">
+    <div class="plan-card">
+      <h2>Mobile</h2>
+      <div class="price">₹149/mo</div>
+      <ul>
+        <li>SD quality</li>
+        <li>Watch on 1 mobile/tablet</li>
+        <li>Download available</li>
+        <li>No TV or Laptop access</li>
+      </ul>
+      <button>Subscribe</button>
+    </div>
+
+    <div class="plan-card">
+      <h2>Standard</h2>
+      <div class="price">₹499/mo</div>
+      <ul>
+        <li>Full HD quality</li>
+        <li>Watch on 2 devices</li>
+        <li>TV, Laptop, Mobile support</li>
+        <li>Download available</li>
+      </ul>
+      <button>Subscribe</button>
+    </div>
+
+    <div class="plan-card">
+      <h2>Premium</h2>
+      <div class="price">₹649/mo</div>
+      <ul>
+        <li>Ultra HD quality</li>
+        <li>Watch on 4 devices</li>
+        <li>All device support</li>
+        <li>Best video and audio</li>
+      </ul>
+      <button>Subscribe</button>
+    </div>
+  </div>
+
+</body>
+</html>
