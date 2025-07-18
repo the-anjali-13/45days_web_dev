@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        
+    // let data = {
+    // name: "Raj",
+    // gender: "Male",
+    // email: "raj@gmail.com", 
+    // status: "Active"
+    // };
+
+    // let options = { 
+        
+    //     method: "POST",
+
+    //             headers: {    "Content-Type": "application/json",
+    //                     Accept: "application/json", 
+    //                     Authorization: "Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d"  },
+
+    //             body: JSON.stringify(data)
+    //     };
+
+    // fetch("https://gorest.co.in/public-api/users", options) 
+    // .then(function(response) {    return response.json();  }) 
+    // .then(function(jsonData) {    console.log(jsonData);  });
+
+    
+// let data = {  name: "prem praksah" };
+
+// let options = {  
+// 		method: "PUT",
+// 		headers: {    
+// 			 "Content-Type": "application/json",  
+// 			  Accept: "application/json",
+// 			  Authorization: "Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d"  
+// 			},  
+// 		body:  JSON.stringify(data)};
+
+// fetch("https://gorest.co.in/public-api/users/8017126", options)  
+// .then(function(response) {    return response.json();  }) 
+// .then(function(jsonData) {    console.log(jsonData);  });
+
+
+let options = {  
+	method: "DELETE",
+	headers: {    
+		"Content-Type": "application/json",
+		  Accept: "application/json", 
+		  Authorization: "Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d"  	
+    }
+};
+
+fetch("https://gorest.co.in/public-api/users/8017126", options) 
+.then(function(response) {    return response.json();  })
+.then(function(jsonData) {    console.log(jsonData);  });
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
