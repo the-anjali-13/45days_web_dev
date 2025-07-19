@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advice or Joke</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .box {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 20px;
+      padding: 20px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    .advice {
+      background-color: #4db6ac;
+    }
+
+    .advice:hover {
+      background-color: #00897b;
+    }
+
+    .joke {
+      background-color: #ffb74d;
+    }
+
+    .joke:hover {
+      background-color: #f57c00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box advice" id="adviceBox">Click here for Advice</div>
+  <div class="box joke" id="jokeBox"> Click here for a Joke</div>
+
+  <script>
+    const adviceBox = document.getElementById("adviceBox");
+    const jokeBox = document.getElementById("jokeBox");
+
+    adviceBox.addEventListener("click", function () {
+      fetch("https://api.adviceslip.com/advice")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          adviceBox.textContent = data.slip.advice;
+        })
+        .catch(function (error) {
+          adviceBox.textContent = "Oops! Couldn't fetch advice.";
+        });
+    });
+
+    jokeBox.addEventListener("click", function () {
+      fetch("https://official-joke-api.appspot.com/random_joke")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          jokeBox.innerHTML = `${data.setup}<br><strong>${data.punchline}</strong>`;
+        })
+        .catch(function (error) {
+          jokeBox.textContent = "Oops! Couldn't fetch joke.";
+        });
+    });
+  </script>
+
+</body>
+</html>
