@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Form</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid gray;
+      border-collapse: collapse;
+      padding: 8px;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Add User</h2>
+  <form id="userForm">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <label>
+      <input type="radio" name="gender" value="male" checked /> Male
+    </label>
+    <label>
+      <input type="radio" name="gender" value="female" /> Female
+    </label>
+    <select id="status">
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+    <button type="submit">Add User</button>
+  </form>
+
+  <p id="postResult" class="success"></p>
+
+  <h3>All Users</h3>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById("userForm");
+    const resultEl = document.getElementById("postResult");
+    const tableBody = document.querySelector("#userTable tbody");
+
+    // POST User
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const gender = document.querySelector("input[name='gender']:checked").value;
+      const status = document.getElementById("status").value;
+
+      fetch("https://gorest.co.in/public/v2/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer 0d02fbb4dfac5ce143822c07b179ffdd2ace1f59c501cd568e30cfe0731f0a57`,
+        },
+        body: JSON.stringify({ name, email, gender, status }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.id) {
+            resultEl.textContent = `User added successfully! ID: ${data.id}`;
+            form.reset();
+          } else {
+            resultEl.textContent = "Error: " + (data.message || "Could not add user.");
+          }
+        });
+    });
+
+    // GET All Users
+    function loadUsers() {
+      let api_promise = fetch("https://gorest.co.in/public/v2/users", {
+        headers: {
+          Authorization: `Bearer 0d02fbb4dfac5ce143822c07b179ffdd2ace1f59c501cd568e30cfe0731f0a57`
+        }
+      });
+
+      console.log(api_promise);
+      console.log("hello1")
+
+        api_promise.then(res => res.json())
+        .then(users => {
+          tableBody.innerHTML = "";
+          users.forEach(user => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${user.id}</td>
+              <td>${user.name}</td>
+              <td>${user.email}</td>
+              <td>${user.gender}</td>
+              <td>${user.status}</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        });
+
+        console.log("hello2")
+    }
+
+    loadUsers(); 
+  </script>
+</body>
+</html>

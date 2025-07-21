@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+           
+        let rup_10 = true;
+        const mypromise = new Promise((resolve,reject)=>{
+
+            if(rup_10){
+                resolve("10 rupee dediye");
+            }
+            else{
+                reject("10 rupee nhi diye");
+            }
+
+        });
+
+        console.log(mypromise);
+
+        mypromise.then((resolvepromise)=>{
+            console.log(resolvepromise);
+        })
+        .catch((rejectpromise)=>{
+            console.log(rejectpromise);
+        })
+
+//         const mypromise = () => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("promise resolved");
+//     }, 1000);
+//   });
+// };
+    </script>
+</body>
+</html>
