@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+    const networkcall  = async () =>{
+        try{
+        const response = await  fetch("https://gorest.co.in/public/v2/us");
+        const jsondata = await response.json();
+        console.log(jsondata) ;
+        }
+        catch(error){
+            console.log("its catch block");
+            console.error(error);
+        }finally{
+            console.log(2+3);
+        }
+    }
+
+    networkcall();
+
+    </script>
+</body>
+</html>

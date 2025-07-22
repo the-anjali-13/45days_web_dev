@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Manager</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    form, .section {
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid gray;
+      border-collapse: collapse;
+      padding: 8px;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+    }
+    .btn {
+      padding: 4px 10px;
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- POST FORM -->
+  <h2>Add User</h2>
+  <form id="userForm">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <label>
+      <input type="radio" name="gender" value="male" checked /> Male
+    </label>
+    <label>
+      <input type="radio" name="gender" value="female" /> Female
+    </label>
+    <select id="status">
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+    <button type="submit">Add User</button>
+    <button type="button" id="saveBtn" class="btn" style="display:none;">Save User</button>
+  </form>
+
+  <!-- Show POST Response -->
+  <p id="postResult" class="success"></p>
+
+  <!-- FETCH USER BY ID -->
+  <div class="section">
+    <h3>Fetch User by ID</h3>
+    <input type="number" id="userIdInput" placeholder="Enter User ID" />
+    <button onclick="fetchUserById()">Bring Data</button>
+  </div>
+
+  <!-- Fetched Single User Table -->
+  <table id="singleUserTable">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- All Users Table -->
+  <h3>All Users</h3>
+  <table id="userTable">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Status</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+<script> 
+
+  const form = document.getElementById("userForm");
+  const resultEl = document.getElementById("postResult");
+  const tableBody = document.querySelector("#userTable tbody");
+  const singleBody = document.querySelector("#singleUserTable tbody");
+  const saveBtn = document.getElementById("saveBtn");
+
+  let currentEditUserId = null;
+
+  // POST New User
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const gender = document.querySelector("input[name='gender']:checked").value;
+    const status = document.getElementById("status").value;
+
+    fetch("https://gorest.co.in/public/v2/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d`,
+      },
+      body: JSON.stringify({ name, email, gender, status }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.id) {
+        resultEl.textContent = `User added successfully! ID: ${data.id}`;
+        form.reset();
+        saveBtn.style.display = "none";
+        loadAllUsers();
+      } else {
+        resultEl.textContent = "Error: " + (data.message || "Something went wrong");
+      }
+    });
+  });
+
+  // GET All Users
+  function loadAllUsers() {
+    fetch("https://gorest.co.in/public/v2/users", {
+      headers: { Authorization: `Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d` }
+    })
+    .then(res => res.json())
+    .then(users => {
+      tableBody.innerHTML = "";
+      users.forEach(user => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.gender}</td>
+          <td>${user.status}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    });
+  }
+
+  // FETCH SINGLE USER BY ID
+  function fetchUserById() {
+    const userId = document.getElementById("userIdInput").value;
+    fetch(`https://gorest.co.in/public/v2/users/${userId}`, {
+      headers: { Authorization: `Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d` }
+    })
+    .then(res => res.json())
+    .then(user => {
+      singleBody.innerHTML = `
+        <tr>
+          <td>${user.id}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.gender}</td>
+          <td>${user.status}</td>
+          <td>
+            <button class="btn" onclick="editUser(${user.id}, '${user.name}', '${user.email}', '${user.gender}', '${user.status}')">Edit</button>
+            <button class="btn" onclick="deleteUser(${user.id})">Delete</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
+
+  // EDIT: Fill Form with User Data
+  function editUser(id, name, email, gender, status) {
+    document.getElementById("name").value = name;
+    document.getElementById("email").value = email;
+    document.querySelector(`input[name='gender'][value='${gender}']`).checked = true;
+    document.getElementById("status").value = status;
+    currentEditUserId = id;
+    saveBtn.style.display = "inline-block";
+  }
+
+  // SAVE Updated User (PUT)
+  saveBtn.addEventListener("click", function () {
+    const updatedData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      gender: document.querySelector("input[name='gender']:checked").value,
+      status: document.getElementById("status").value,
+    };
+
+    fetch(`https://gorest.co.in/public/v2/users/${currentEditUserId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d`,
+      },
+      body: JSON.stringify(updatedData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("User updated successfully!");
+      form.reset();
+      saveBtn.style.display = "none";
+      fetchUserById();
+      loadAllUsers();
+    });
+  });
+
+  // DELETE User
+  function deleteUser(id) {
+    fetch(`https://gorest.co.in/public/v2/users/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer 5a3b0f7a084f6fffa06191078b5acdcce2f0b7a012dc45f9530f23a2182b264d` }
+    })
+    .then(() => {
+      alert("User deleted successfully!");
+      singleBody.innerHTML = "";
+      loadAllUsers();
+    });
+  }
+
+  loadAllUsers(); // Load on page load
+</script>
+
+</body>
+</html>
