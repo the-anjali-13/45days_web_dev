@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokémon Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: inline-block;
+      margin-top: 20px;
+      max-width: 300px;
+    }
+    img {
+      width: 150px;
+    }
+    input {
+      padding: 10px;
+      width: 200px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔍 Pokémon Finder</h1>
+  <input type="text" id="pokemonInput" placeholder="Enter name or ID"/>
+  <button onclick="searchPokemon()">Search</button>
+  <button onclick="clearData()">Clear</button>
+
+  <div id="pokemonCard"></div>
+  <p id="errorMsg" class="error"></p>
+
+  <script>
+    async function searchPokemon() {
+      const input = document.getElementById("pokemonInput").value.trim().toLowerCase();
+      const card = document.getElementById("pokemonCard");
+      const error = document.getElementById("errorMsg");
+
+      card.innerHTML = "";
+      error.innerText = "";
+
+      if (!input) {
+        error.innerText = "Please enter a Pokémon name.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${input}`);
+        if (!res.ok) throw new Error("Not Found");
+
+        const data = await res.json();
+
+        const name = capitalize(data.name);
+        const img = data.sprites.front_default;
+        const types = data.types.map(t => capitalize(t.type.name)).join(", ");
+        const weight = data.weight;
+        const abilities = data.abilities.map(a => capitalize(a.ability.name)).join(", ");
+
+        card.innerHTML = `
+          <div class="card">
+            <img src="${img}" alt="${name}" />
+            <h2>${name}</h2>
+            <p><strong>Type:</strong> ${types}</p>
+            <p><strong>Weight:</strong> ${weight}</p>
+            <p><strong>Abilities:</strong> ${abilities}</p>
+          </div>
+        `;
+      } catch (err) {
+        error.innerText = "Oops! Pokémon not found. Try again.";
+      }
+    }
+
+    function clearData() {
+      document.getElementById("pokemonInput").value = "";
+      document.getElementById("pokemonCard").innerHTML = "";
+      document.getElementById("errorMsg").innerText = "";
+    }
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1); 
+    }
+  </script>
+
+</body>
+</html>

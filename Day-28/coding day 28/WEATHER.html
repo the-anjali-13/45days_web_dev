@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 16px;
+  width: 300px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.search-bar button {
+  background-color: #eee;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.search-bar img {
+  height: 20px;
+  width: 20px;
+}
+
+.weather-box img {
+  width: 80px;
+  height: 80px;
+}
+
+.weather-box h1 {
+  font-size: 40px;
+  margin: 10px 0 5px;
+}
+
+.weather-box p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.hourly-forecast {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  overflow-x: auto;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.hour-box {
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  min-width: 50px;
+}
+
+.hour-box img {
+  height: 30px;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="input" placeholder="enter city name">
+            <button onclick="getweather()">Search</button>
+        </div>
+        <div class="weather-box">
+            <img class="weatherIcon" id="icon-img">
+            <h1 class="temperature" id="temp"></h1>
+            <p class="condition" id="con"></p>
+        </div>
+        <div class="hourly-forecast" id="hour-div"></div>
+    </div>  
+    <script>
+        async function getweather(){
+
+            const city = document.getElementById("input").value;
+            const API_KEY = "4437b365fa7a460eb7a45926252307"; 
+            const hourdiv = document.getElementById("hour-div");
+
+            try{
+
+            const res = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no&alerts=no`);
+            const data = await res.json();
+
+             const condition = data.current.condition.text;
+             const icon = data.current.condition.icon;
+             const temp = data.current.temp_c;
+
+            document.getElementById("icon-img").src = "https:" + icon ;
+            document.getElementById("temp").textContent = `${temp} *C`;
+            document.getElementById("con").textContent = "condition " + condition;
+
+            hourdiv.innerHTML = "";
+
+            for(let i=0 ; i<5; i++){
+
+                const hour = data.forecast.forecastday[0].hour[new Date().getHours() + i];
+                if(!hour){
+                    continue;
+                }
+
+                const subhourbox = document.createElement("div");
+                subhourbox.innerHTML = `
+                    <div>${hour.time.split(" ")[1]}</div>
+                    <img src="https:${hour.condition.icon}" alt="icon" />
+                    <div>${hour.temp_c}°</div>
+                  `;
+
+                hourdiv.appendChild(subhourbox);
+            }        
+            }
+
+            catch(error){
+                console.error("something is wrong" + error);
+            }
+            
+
+
+        }
+    </script>  
+</body>
+</html>
