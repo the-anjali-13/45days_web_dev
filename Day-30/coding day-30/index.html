@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel"> 
+ 	// const Welcome = () => <h1 className="message">Hello, User</h1>;
+    // ReactDOM.render(  
+	// 	<Welcome name="Rahul" greeting="Hello" />,
+    //      					document.getElementById("root")
+	// 	);
+
+    
+    // const Welcome = (props) => {  
+    //     const { name, greeting } = props; 
+
+    //     return (   
+    //         <h1 className="message">  {greeting}, {name}   </h1>
+    //     );
+    // };
+
+    // ReactDOM.render(  <div>    
+    //                 <Welcome name="Rahul" greeting="Hello" />
+    //                 <Welcome name="Ram" greeting="Hi" />
+    //                 </div> ,
+    //   				document.getElementById("root")
+	// 	);
+
+    const Welcome = (props) => {  
+        const { name, greeting } = props;
+        return (   
+            <h1 className="message"> {greeting}, {name}    </h1> 
+        );
+    };
+    const Greetings = () => (
+            <div>
+        <Welcome name="Radha" greeting="Hello" />  
+        <Welcome name="sita" greeting="Hi" />
+            </div>
+    );
+    ReactDOM.render(<Greetings />, document.getElementById("root"));
+
+
+
+
+    </script>
+
+
+</body>
+</html>
