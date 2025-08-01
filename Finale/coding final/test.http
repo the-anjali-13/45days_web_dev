@@ -1,0 +1,47 @@
+GET http://localhost:3000/
+
+### POST - Add a new student
+POST http://localhost:3000/students
+Content-Type: application/json
+
+{
+  "id": 4,
+  "name": "riya"
+}
+
+####
+PUT http://localhost:3000/students/2
+Content-Type: application/json
+
+{
+  "name": "Ravi Kumar"
+}
+
+### 
+DELETE http://localhost:3000/students/2
+
+//routes of databse connection 
+
+### GET All Students
+GET http://localhost:3001/api/students
+
+###  POST - Add a New Student
+POST http://localhost:3001/api/students
+Content-Type: application/json
+
+{
+  "name": "Kartik",
+  "age": 22
+}
+
+### PUT - Update a Student by ID
+PUT http://localhost:3001/api/students/1
+Content-Type: application/json
+
+{
+  "name": "Ravi Kumar",
+  "age": 23
+}
+
+###  DELETE - Remove a Student by ID
+DELETE http://localhost:3001/api/students/1
